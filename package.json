@@ -1,0 +1,8 @@
+{
+  "name": "jmusic",
+  "private": true,
+  "workspaces": [
+    "engine",
+    "jm-glass"
+  ]
+}

@@ -1,0 +1,21 @@
+body {
+  background: url(images/background3.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.large-card {
+  background: rgba(255,255,255,0.4);
+  border: 1px solid rgba(255,255,255,0.2);
+
+  width: 100%;
+  height: 80vh;
+
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+}
