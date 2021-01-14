@@ -9,25 +9,29 @@ var ShapeDifficulty;
 })(ShapeDifficulty = exports.ShapeDifficulty || (exports.ShapeDifficulty = {}));
 exports.BAR_CHORD = 1;
 exports.CLASSIC = 2;
-class Shape {
-    constructor(shape, difficulty = ShapeDifficulty.HARD, extra = 0) {
+var Shape = /** @class */ (function () {
+    function Shape(shape, difficulty, extra) {
+        if (difficulty === void 0) { difficulty = ShapeDifficulty.HARD; }
+        if (extra === void 0) { extra = 0; }
         this.difficulty = difficulty;
         this.extra = extra;
-        const lmin = Math.min(...shape.filter((n) => n !== -1));
-        this.locations = shape.map((n) => (n === -1 ? -1 : n - lmin));
+        var lmin = Math.min.apply(Math, shape.filter(function (n) { return n !== -1; }));
+        this.locations = shape.map(function (n) { return (n === -1 ? -1 : n - lmin); });
     }
-    compare(other) {
-        let diff = 0;
-        other.locations.forEach((_, string) => {
-            const d2 = Math.abs(this.locations[string] - other.locations[string]);
+    Shape.prototype.compare = function (other) {
+        var _this = this;
+        var diff = 0;
+        other.locations.forEach(function (_, string) {
+            var d2 = Math.abs(_this.locations[string] - other.locations[string]);
             diff += d2 * d2;
         });
         return {
             difficulty: this.difficulty + diff,
             match: diff === 0,
         };
-    }
-}
+    };
+    return Shape;
+}());
 exports.Shape = Shape;
 exports.SHAPES = [
     new Shape([0, 0, 0, 0, 0, 0], ShapeDifficulty.EASY, exports.BAR_CHORD),
@@ -310,13 +314,14 @@ exports.SHAPES = [
     new Shape([0, 0, 3, 3, 3, 3], ShapeDifficulty.EASY, exports.BAR_CHORD | exports.CLASSIC),
     new Shape([5, 0, 0, 0, 3, 0], ShapeDifficulty.EASY),
 ];
-const compareWithKnownShapes = (shape) => {
-    const min = {
+var compareWithKnownShapes = function (shape) {
+    var _a, _b;
+    var min = {
         difficulty: 50,
         shape: null,
     };
-    exports.SHAPES.forEach((s) => {
-        const info = s.compare(shape);
+    exports.SHAPES.forEach(function (s) {
+        var info = s.compare(shape);
         if (info.difficulty < min.difficulty) {
             min.difficulty = info.difficulty;
             min.shape = s;
@@ -324,7 +329,7 @@ const compareWithKnownShapes = (shape) => {
     });
     return {
         min: min.difficulty,
-        extras: min?.shape?.extra ?? 0,
+        extras: (_b = (_a = min === null || min === void 0 ? void 0 : min.shape) === null || _a === void 0 ? void 0 : _a.extra) !== null && _b !== void 0 ? _b : 0,
     };
 };
 exports.compareWithKnownShapes = compareWithKnownShapes;

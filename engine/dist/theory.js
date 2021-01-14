@@ -16,31 +16,35 @@ exports.SCALE_NOTES = [
     "A#",
     "B",
 ];
-class CircleOfFifthsImpl {
-    constructor() {
+var CircleOfFifthsImpl = /** @class */ (function () {
+    function CircleOfFifthsImpl() {
         this.scales = [];
-        for (let root = 0; root <= 12; root++) {
-            let fnote = root;
+        for (var root = 0; root <= 12; root++) {
+            var fnote = root;
             this.scales[root] = [fnote];
-            for (let item = 0; item <= 14; item++) {
+            for (var item = 0; item <= 14; item++) {
                 fnote += exports.IONIAN_SCALE[item % 7];
                 this.scales[root].push(fnote % 12);
             }
         }
     }
-}
+    return CircleOfFifthsImpl;
+}());
 exports.CircleOfFifthsImpl = CircleOfFifthsImpl;
 exports.CircleOfFifths = new CircleOfFifthsImpl();
-const getNoteByName = (name) => exports.SCALE_NOTES.findIndex((note) => note === name.toUpperCase());
+var getNoteByName = function (name) {
+    return exports.SCALE_NOTES.findIndex(function (note) { return note === name.toUpperCase(); });
+};
 exports.getNoteByName = getNoteByName;
-const getNoteFromMIDI = (midi) => midi % 12;
+var getNoteFromMIDI = function (midi) { return midi % 12; };
 exports.getNoteFromMIDI = getNoteFromMIDI;
-class Scale {
-    constructor(name, intervals) {
+var Scale = /** @class */ (function () {
+    function Scale(name, intervals) {
         this.name = name;
         this.intervals = intervals;
     }
-}
+    return Scale;
+}());
 exports.Scale = Scale;
 exports.SCALES = [
     new Scale("Ionian (major)", [2, 2, 1, 2, 2, 2, 1]),
@@ -71,40 +75,44 @@ exports.AUGMENTS = {
     bb: -2,
     "": 0,
 };
-class Tone {
-    constructor(root, augment) {
+var Tone = /** @class */ (function () {
+    function Tone(root, augment) {
         this.root = root;
         this.augment = augment;
     }
-    static parse(text) {
-        const found = text.match(/^(\d+)(.*)$/);
+    Tone.parse = function (text) {
+        var _a;
+        var found = text.match(/^(\d+)(.*)$/);
         return found
-            ? new Tone(parseInt(found[1]), exports.AUGMENTS[found?.[2]] ?? 0)
+            ? new Tone(parseInt(found[1]), (_a = exports.AUGMENTS[found === null || found === void 0 ? void 0 : found[2]]) !== null && _a !== void 0 ? _a : 0)
             : null;
-    }
-}
+    };
+    return Tone;
+}());
 exports.Tone = Tone;
-class ChordSpelling {
-    constructor(name, shortName, toneString) {
+var ChordSpelling = /** @class */ (function () {
+    function ChordSpelling(name, shortName, toneString) {
         this.name = name;
         this.shortName = shortName;
-        this.tones = toneString.split(",").map((t) => Tone.parse(t));
+        this.tones = toneString.split(",").map(function (t) { return Tone.parse(t); });
     }
-    note(root, tone) {
-        const fnote = exports.CircleOfFifths.scales[root][tone.root - 1] + tone.augment;
+    ChordSpelling.prototype.note = function (root, tone) {
+        var fnote = exports.CircleOfFifths.scales[root][tone.root - 1] + tone.augment;
         return (fnote + 12) % 12;
-    }
-    notes(root) {
-        return this.tones.map((t) => this.note(root, t));
-    }
-    inversions(root) {
-        const map = {};
-        this.notes(root).forEach((n, inv) => {
+    };
+    ChordSpelling.prototype.notes = function (root) {
+        var _this = this;
+        return this.tones.map(function (t) { return _this.note(root, t); });
+    };
+    ChordSpelling.prototype.inversions = function (root) {
+        var map = {};
+        this.notes(root).forEach(function (n, inv) {
             map[n] = inv + 1;
         });
         return map;
-    }
-}
+    };
+    return ChordSpelling;
+}());
 exports.ChordSpelling = ChordSpelling;
 exports.CHORDS = [
     new ChordSpelling("Maj.", ",maj", "1,3,5"),
@@ -159,18 +167,26 @@ exports.CHORDS = [
     new ChordSpelling("Min.-Maj. 9th", null, "1,3b,5,7,9"),
     new ChordSpelling("Sus. 4", "sus4", "1,4,5"),
 ];
-const getChordByName = (name) => exports.CHORDS.find((c) => c.name === name);
+var getChordByName = function (name) {
+    return exports.CHORDS.find(function (c) { return c.name === name; });
+};
 exports.getChordByName = getChordByName;
-const getChordByShortName = (name) => exports.CHORDS.filter(({ shortName }) => shortName).find((spelling) => spelling.shortName?.split(",").includes(name));
+var getChordByShortName = function (name) {
+    return exports.CHORDS.filter(function (_a) {
+        var shortName = _a.shortName;
+        return shortName;
+    }).find(function (spelling) { var _a; return (_a = spelling.shortName) === null || _a === void 0 ? void 0 : _a.split(",").includes(name); });
+};
 exports.getChordByShortName = getChordByShortName;
-const parseShortName = (shortName) => {
-    const found = shortName.match(/([A-Z](?:[b#])?)(.*?)$/i);
+var parseShortName = function (shortName) {
+    var _a;
+    var found = shortName.match(/([A-Z](?:[b#])?)(.*?)$/i);
     if (!found) {
         return null;
     }
-    let root = 0;
+    var root = 0;
     if (found[1].search(/[A-Z]b/i)) {
-        const rootFound = found[1].match(/([A-Z])/)?.[1];
+        var rootFound = (_a = found[1].match(/([A-Z])/)) === null || _a === void 0 ? void 0 : _a[1];
         if (!rootFound) {
             return null;
         }
@@ -180,7 +196,7 @@ const parseShortName = (shortName) => {
         root = exports.getNoteByName(found[1]);
     }
     return {
-        root,
+        root: root,
         chord: exports.getChordByShortName(shortName),
     };
 };

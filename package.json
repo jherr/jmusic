@@ -4,5 +4,8 @@
   "workspaces": [
     "engine",
     "jm-glass"
-  ]
+  ],
+  "scripts": {
+    "serve:cache": "cd cache && npx servor"
+  }
 }

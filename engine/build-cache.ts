@@ -21,7 +21,7 @@ const createCache = () => {
           path,
           JSON.stringify({
             version: 1,
-            chords: chords.map((c) => ({
+            chords: chords.slice(0, 48).map((c) => ({
               notes: c.notes,
               inversion: c.inversion,
               playability: c.playability,

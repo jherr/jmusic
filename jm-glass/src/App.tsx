@@ -1,55 +1,115 @@
 /** @jsxImportSource @emotion/react */
-import styled from "@emotion/styled";
+import React from "react";
 import tw from "twin.macro";
-import { SCALE_NOTES } from "jmusic-engine";
+import styled from "@emotion/styled";
+import { CHORDS, StringedInstrument } from "jmusic-engine";
 
 import "tailwindcss/dist/base.min.css";
 import "./App.css";
 
+import ChordSelector from "./components/ChordSelector";
+import NoteSelector from "./components/NoteSelector";
+import Chord from "./components/Chord";
+
+const guitar = StringedInstrument.guitar;
+
 const Container = tw.div`max-w-7xl mx-auto p-5 mt-5`;
 const LargeCard = tw.div`rounded-3xl`;
-const Heading = tw.div`text-gray-800`;
+
 const Sidebar = tw.div`rounded-3xl rounded-r-none p-5 bg-white bg-opacity-90`;
 const Content = tw.div`p-5`;
 const TopBar = tw.div`rounded-tr-3xl p-5 bg-white bg-opacity-90`;
 
-const SelectorContainer = tw.div`rounded-full bg-gray-300 grid grid-cols-12`;
-const PillBase = tw.div`py-2 inline-block text-gray-600 text-center`;
-const Pill = styled(PillBase)<{ selected?: boolean }>(({ selected }) => [
+const ChordsContainer = tw.div`grid grid-cols-6 gap-2`;
+
+const PagesBar = tw.div`w-8/12 text-right`;
+const PagesContainer = tw.div`p-3`;
+const PageBase = tw.button`py-2 px-4 inline-block text-gray-600 text-center`;
+const Page = styled(PageBase)<{ selected?: boolean }>(({ selected }) => [
   selected && tw`bg-gray-800 text-gray-200 rounded-full`,
 ]);
 
-const NoteSelector: React.FC<{
-  note?: number;
-}> = ({ note }) => (
-  <SelectorContainer>
-    {SCALE_NOTES.map((name, index) => (
-      <Pill key={name} selected={note === index}>
-        {name}
-      </Pill>
-    ))}
-  </SelectorContainer>
-);
+interface SimplifiedChord {
+  notes: number[];
+  playability: number;
+  inversion: number;
+}
 
 function App() {
+  const [state, stateSet] = React.useState<{
+    note: number;
+    chord: number;
+  }>({ note: 4, chord: 0 });
+  const [groups, groupsSet] = React.useState<SimplifiedChord[][]>([]);
+  const [group, groupSet] = React.useState<number>(0);
+
+  React.useEffect(() => {
+    const getChords = async () => {
+      const req = await fetch(
+        `http://localhost:8080/guitar_Guitar Standard_${
+          CHORDS[state.chord].name
+        }_${state.note}.json`
+      );
+      const resp = await req.json();
+      const newChords: SimplifiedChord[] = resp.chords;
+      groupSet(0);
+      const newGroups = [];
+      while (newChords.length > 0) {
+        newGroups.push(newChords.splice(0, 12));
+      }
+      groupsSet(newGroups);
+    };
+    getChords();
+  }, [state]);
+
   return (
-    <div>
-      <Container>
-        <LargeCard className="large-card">
-          <Sidebar>
-            <Heading>Sidebar</Heading>
-          </Sidebar>
-          <div>
-            <TopBar>
-              <NoteSelector />
-            </TopBar>
-            <Content>
-              <Heading>Content</Heading>
-            </Content>
-          </div>
-        </LargeCard>
-      </Container>
-    </div>
+    <Container>
+      <LargeCard className="large-card">
+        <Sidebar>
+          <ChordSelector
+            index={state.chord}
+            onChange={(chord) =>
+              stateSet({
+                ...state,
+                chord,
+              })
+            }
+          />
+        </Sidebar>
+        <div>
+          <TopBar>
+            <NoteSelector
+              note={state.note}
+              onChange={(note) =>
+                stateSet({
+                  ...state,
+                  note,
+                })
+              }
+            />
+          </TopBar>
+          <Content>
+            <ChordsContainer>
+              {(groups?.[group] || []).map((chord, index) => (
+                <Chord key={index} chord={chord} instrument={guitar} />
+              ))}
+            </ChordsContainer>
+            <PagesBar>
+              <PagesContainer>
+                {groups.map((_, index) => (
+                  <Page
+                    selected={group === index}
+                    onClick={() => groupSet(index)}
+                  >
+                    {index + 1}
+                  </Page>
+                ))}
+              </PagesContainer>
+            </PagesBar>
+          </Content>
+        </div>
+      </LargeCard>
+    </Container>
   );
 }
 

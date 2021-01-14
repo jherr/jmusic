@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es5",
     "module": "commonjs",
     "rootDir": "src",
     "outDir": "dist",
+    "declaration": true,
     "strict": true,
     "types": [ "node", "jest" ],
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
   },
-  "files": [ "src/*.ts" ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }
