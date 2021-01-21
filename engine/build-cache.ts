@@ -10,7 +10,7 @@ const createCache = () => {
       );
       console.log(name);
 
-      const path = `../cache/${name}.json`;
+      const path = `../jm-glass/public/cache/${name}.json`;
 
       if (!fs.existsSync(path)) {
         const chords = chordFinder(instrument, chord, root, {

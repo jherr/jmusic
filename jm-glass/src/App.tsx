@@ -11,6 +11,8 @@ import ChordSelector from "./components/ChordSelector";
 import NoteSelector from "./components/NoteSelector";
 import Chord from "./components/Chord";
 
+const CACHE_HOST = "/cache/";
+
 const guitar = StringedInstrument.guitar;
 
 const Container = tw.div`max-w-7xl mx-auto p-5 mt-5`;
@@ -46,9 +48,9 @@ function App() {
   React.useEffect(() => {
     const getChords = async () => {
       const req = await fetch(
-        `http://localhost:8080/guitar_Guitar Standard_${
-          CHORDS[state.chord].name
-        }_${state.note}.json`
+        `${CACHE_HOST}/guitar_Guitar Standard_${CHORDS[state.chord].name}_${
+          state.note
+        }.json`
       );
       const resp = await req.json();
       const newChords: SimplifiedChord[] = resp.chords;
