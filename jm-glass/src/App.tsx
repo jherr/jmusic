@@ -100,6 +100,7 @@ function App() {
               <PagesContainer>
                 {groups.map((_, index) => (
                   <Page
+                    key={index}
                     selected={group === index}
                     onClick={() => groupSet(index)}
                   >

@@ -100,10 +100,11 @@ const ChordSVG: React.FC<{
           }}
         />
       ))}
-      {chord.notes.map((note, string) =>
+      {chord.notes.map((note, index) =>
         note !== -1 ? (
           <circle
-            cx={string * 15 + 9.5}
+            key={index}
+            cx={index * 15 + 9.5}
             cy={12 + (note - minFret) * 27 + (note - minFret === 0 ? 0 : -7)}
             r={5}
             style={{
