@@ -15,14 +15,14 @@ const CACHE_HOST = "/cache/";
 
 const guitar = StringedInstrument.guitar;
 
-const Container = tw.div`max-w-7xl mx-auto p-5 mt-5`;
+const Container = tw.div`max-w-7xl mx-auto p-0 md:p-5 mt-5`;
 const LargeCard = tw.div`rounded-3xl`;
 
-const Sidebar = tw.div`rounded-3xl rounded-r-none p-5 bg-white bg-opacity-90`;
+const Sidebar = tw.div`rounded-3xl rounded-r-none p-3 md:p-5 bg-white bg-opacity-90`;
 const Content = tw.div`p-5`;
-const TopBar = tw.div`rounded-tr-3xl p-5 bg-white bg-opacity-90`;
+const TopBar = tw.div`rounded-tr-3xl p-5 bg-white bg-opacity-90 sticky top-0`;
 
-const ChordsContainer = tw.div`grid grid-cols-6 gap-2`;
+const ChordsContainer = tw.div`grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-2`;
 
 const PagesBar = tw.div`w-8/12 text-right`;
 const PagesContainer = tw.div`p-3`;
