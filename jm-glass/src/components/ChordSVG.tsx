@@ -1,5 +1,5 @@
 import React from "react";
-import { StringedInstrument } from "../../../engine/src/strings";
+import { StringedInstrument } from "@engine/strings";
 
 const BALLS: {
   [fret: number]: number;

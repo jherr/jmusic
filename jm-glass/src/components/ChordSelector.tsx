@@ -2,7 +2,7 @@
 import { Menu, Transition } from "@headlessui/react";
 import { CHORDS } from "jmusic-engine";
 import React from "react";
-import { ChordPill, ChordSelectorContainer, MenuButton } from "../design/Theme";
+import { ChordPill, ChordSelectorContainer, MenuButton } from "@design/Theme";
 
 const ChordSelector: React.FC<{
   index?: number;

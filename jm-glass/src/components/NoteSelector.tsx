@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { SCALE_NOTES } from "jmusic-engine";
 import React from "react";
-import { NoteSelectorContainer, Pill } from "../design/Theme";
+import { NoteSelectorContainer, Pill } from "@design/Theme";
 
 const NoteSelector: React.FC<{
   note?: number;

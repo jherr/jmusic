@@ -21,6 +21,8 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src", "../jmusic-engine"
-  ]
+    "src",
+    "../jmusic-engine"
+  ],
+  "extends": "./tsconfig.path.json"
 }

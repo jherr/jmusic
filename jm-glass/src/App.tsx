@@ -13,7 +13,7 @@ import {
   Page,
   PagesBar,
   PagesContainer,
-} from "./design/Theme";
+} from "@design/Theme";
 
 const CACHE_HOST = "/cache/";
 const guitar = StringedInstrument.guitar;
