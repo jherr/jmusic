@@ -24,3 +24,21 @@ The target audience is any stringed instrument player at who is at a level where
 To give stringed instrument players a new tool that allows them to play with the tuning of their instrument and find chords, scales and chord sequences, that are playable, on that new tuning.
 
 It's also for software engineers who want to be able to try their hand at Open Source coding by help create an attractive, useful and unique application.
+
+## What are some ways I can contribute?
+
+**Technical folks who aren't musicians**
+
+* We are building a nascent set of glassmorphic tailwind components in the `design` directory. Help add new components there, and perhaps break it out into it's own project in the mono-repo and add a storybook or styleguidist set to it.
+* Help with deployment of the application.
+* Help to address issues with responsiveness, a11y or i18n.
+* Help to address performance issues in the engine.
+
+**Technical folks who are musically inclined**
+
+* Help us build out the set of musical UI components (piano display, horizontal fretbard, tabulature)
+* Help us refine the engine so that it produces better results more quickly
+
+**Musicians**
+
+* Let us know if this is useful to you and how it could be more useful
