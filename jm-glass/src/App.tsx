@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import { CHORDS, StringedInstrument } from "jmusic-engine";
-import React from "react";
-import "tailwindcss/dist/base.min.css";
-import "./App.css";
-import { Chord, ChordSelector, NoteSelector } from "./components";
+import { CHORDS, StringedInstrument } from 'jmusic-engine';
+import React from 'react';
+import 'tailwindcss/dist/base.min.css';
+import './App.css';
+import { Chord, ChordSelector, NoteSelector } from './components';
 import {
   ContentContainer,
   Header,
@@ -13,9 +13,9 @@ import {
   Page,
   PagesBar,
   PagesContainer,
-} from "@design/Theme";
+} from '@design/Theme';
 
-const CACHE_HOST = "/cache/";
+const CACHE_HOST = '/cache/';
 const guitar = StringedInstrument.guitar;
 
 interface SimplifiedChord {
