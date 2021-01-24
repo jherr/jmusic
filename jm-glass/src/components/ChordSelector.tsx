@@ -6,7 +6,7 @@ import { CHORDS } from "jmusic-engine";
 
 import { Menu, Transition } from "@headlessui/react";
 
-const ChordSelectorContainer = tw.div`absolute overflow-y-scroll max-h-full left-0 w-48 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none`;
+const ChordSelectorContainer = tw.div`absolute overflow-y-scroll max-h-96 left-0 w-48 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none`;
 const ChordPillBase = tw.button`w-full py-1 px-3 text-xs text-gray-600`;
 const ChordPill = styled(ChordPillBase)<{ selected?: boolean }>(
   ({ selected }) => [selected && tw`bg-gray-800 text-gray-200 rounded-l-md`]
@@ -24,7 +24,7 @@ const ChordSelector: React.FC<{
     {({ open }) => (
       <>
         <span className="rounded-md shadow-sm">
-          <MenuButton>
+          <MenuButton >
             <span>{index ? CHORDS[index].name : "Chords"}</span>
           </MenuButton>
         </span>
@@ -37,9 +37,10 @@ const ChordSelector: React.FC<{
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <ChordSelectorContainer>
+          <ChordSelectorContainer >
             {CHORDS.map(({ name }, cIndex) => (
               <ChordPill
+              
                 key={cIndex}
                 selected={cIndex === index}
                 onClick={() => onChange?.(cIndex)}
