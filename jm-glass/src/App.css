@@ -1,5 +1,5 @@
 body {
-  background: url(design/images/background3.png) no-repeat center center fixed;
+  background: url(design/images/background1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -9,6 +9,9 @@ body {
 .chord-card {
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: -2rem 0 3rem -2rem #000;
+
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 .large-card {
@@ -16,9 +19,6 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.2);
 
   width: 100%;
-
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
 
   display: grid;
   grid-template-columns: 1fr 5fr;
