@@ -1,35 +1,22 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
-import tw from "twin.macro";
-import styled from "@emotion/styled";
 import { CHORDS, StringedInstrument } from "jmusic-engine";
-
+import React from "react";
 import "tailwindcss/dist/base.min.css";
 import "./App.css";
-
-import ChordSelector from "./components/ChordSelector";
-import NoteSelector from "./components/NoteSelector";
-import Chord from "./components/Chord";
+import { Chord, ChordSelector, NoteSelector } from "./components";
+import {
+  ContentContainer,
+  Header,
+  HeaderContainer,
+  Logo,
+  MainContainer,
+  Page,
+  PagesBar,
+  PagesContainer,
+} from "@design/Theme";
 
 const CACHE_HOST = "/cache/";
-
 const guitar = StringedInstrument.guitar;
-
-const Container = tw.div`max-w-7xl mx-auto p-0 md:p-5 mt-5`;
-const LargeCard = tw.div`rounded-3xl`;
-
-const Sidebar = tw.div`rounded-3xl rounded-r-none p-3 md:p-5 bg-white bg-opacity-90`;
-const Content = tw.div`p-5`;
-const TopBar = tw.div`rounded-tr-3xl p-5 bg-white bg-opacity-90 sticky top-0`;
-
-const ChordsContainer = tw.div`grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-2`;
-
-const PagesBar = tw.div`w-8/12 text-right`;
-const PagesContainer = tw.div`p-3`;
-const PageBase = tw.button`py-2 px-4 inline-block text-gray-600 text-center`;
-const Page = styled(PageBase)<{ selected?: boolean }>(({ selected }) => [
-  selected && tw`bg-gray-800 text-gray-200 rounded-full`,
-]);
 
 interface SimplifiedChord {
   notes: number[];
@@ -65,54 +52,50 @@ function App() {
   }, [state]);
 
   return (
-    <Container>
-      <LargeCard className="large-card">
-        <Sidebar>
-          <ChordSelector
-            index={state.chord}
-            onChange={(chord) =>
-              stateSet({
-                ...state,
-                chord,
-              })
-            }
-          />
-        </Sidebar>
-        <div>
-          <TopBar>
-            <NoteSelector
-              note={state.note}
-              onChange={(note) =>
+    <MainContainer>
+      <Header>
+        <HeaderContainer>
+          <Logo>
+            <ChordSelector
+              index={state.chord}
+              onChange={(chord) =>
                 stateSet({
                   ...state,
-                  note,
+                  chord,
                 })
               }
             />
-          </TopBar>
-          <Content>
-            <ChordsContainer>
-              {(groups?.[group] || []).map((chord, index) => (
-                <Chord key={index} chord={chord} instrument={guitar} />
-              ))}
-            </ChordsContainer>
-            <PagesBar>
-              <PagesContainer>
-                {groups.map((_, index) => (
-                  <Page
-                    key={index}
-                    selected={group === index}
-                    onClick={() => groupSet(index)}
-                  >
-                    {index + 1}
-                  </Page>
-                ))}
-              </PagesContainer>
-            </PagesBar>
-          </Content>
-        </div>
-      </LargeCard>
-    </Container>
+          </Logo>
+          <NoteSelector
+            note={state.note}
+            onChange={(note) =>
+              stateSet({
+                ...state,
+                note,
+              })
+            }
+          />
+        </HeaderContainer>
+      </Header>
+      <ContentContainer>
+        {(groups?.[group] || []).map((chord, index) => (
+          <Chord key={index} chord={chord} instrument={guitar} />
+        ))}
+      </ContentContainer>
+      <PagesBar>
+        <PagesContainer>
+          {groups.map((_, index) => (
+            <Page
+              key={index}
+              selected={group === index}
+              onClick={() => groupSet(index)}
+            >
+              {index + 1}
+            </Page>
+          ))}
+        </PagesContainer>
+      </PagesBar>
+    </MainContainer>
   );
 }
 
