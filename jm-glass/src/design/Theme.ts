@@ -11,7 +11,7 @@ export const HeaderContainer = tw.div`container mx-auto flex flex-wrap p-5 flex-
 export const ContentContainer = tw.div`grid grid-rows-3 md:grid-rows-3 sm:grid-flow-row md:grid-flow-col gap-4`;
 
 /** Chord Selector */
-export const ChordSelectorContainer = tw.div`absolute overflow-y-scroll h-screen left-0 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none`;
+export const ChordSelectorContainer = tw.div`z-50 absolute overflow-y-scroll h-screen left-0 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none`;
 export const ChordPillBase = tw.button`w-full py-1 px-3 text-xs text-gray-600`;
 export const ChordPill = styled(ChordPillBase)<{ selected?: boolean }>(
   ({ selected }) => [selected && tw`bg-gray-800 text-gray-200 rounded-l-md`]
