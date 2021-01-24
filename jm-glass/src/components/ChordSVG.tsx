@@ -31,7 +31,7 @@ const ChordSVG: React.FC<{
         <text
           x={(instrument.topNames.length - 1) * 15 + 15}
           y={16}
-          style={{ fontSize: "0.5rem" }}
+          style={{ fontSize: "0.5rem", fill: "#eee" }}
         >
           {minFret}
         </text>
@@ -44,7 +44,7 @@ const ChordSVG: React.FC<{
               cy={fret * 27}
               r={4}
               style={{
-                fill: "#999",
+                fill: "#ccc",
               }}
             ></circle>
           )}
@@ -55,7 +55,7 @@ const ChordSVG: React.FC<{
                 cy={fret * 27}
                 r={4}
                 style={{
-                  fill: "#999",
+                  fill: "#ccc",
                 }}
               ></circle>
               <circle
@@ -63,7 +63,7 @@ const ChordSVG: React.FC<{
                 cy={fret * 27}
                 r={4}
                 style={{
-                  fill: "#999",
+                  fill: "#ccc",
                 }}
               ></circle>
             </>
@@ -72,7 +72,11 @@ const ChordSVG: React.FC<{
       ))}
       {instrument.topNames.map((note, index) => (
         <g key={`${note}:${index}:label`}>
-          <text x={index * 15 + 7.5} y={10} style={{ fontSize: "0.5rem" }}>
+          <text
+            x={index * 15 + 7.5}
+            y={10}
+            style={{ fontSize: "0.5rem", fill: "#eee" }}
+          >
             {note}
           </text>
           <line
@@ -82,7 +86,7 @@ const ChordSVG: React.FC<{
             y2={160}
             style={{
               strokeWidth: WIDTHS[index],
-              stroke: "#666",
+              stroke: "#ddd",
             }}
           />
         </g>
@@ -96,7 +100,7 @@ const ChordSVG: React.FC<{
           y2={12 + fret * 27}
           style={{
             strokeWidth: 1,
-            stroke: "#666",
+            stroke: "#ddd",
           }}
         />
       ))}
