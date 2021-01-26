@@ -23,3 +23,12 @@ body {
   display: grid;
   grid-template-columns: 1fr 5fr;
 }
+
+.number {
+  color: black;
+  background: white;
+  padding-left: 2px;
+  padding-right: 2px;
+  text-anchor: middle;
+  font-family: Arial, Verdana, Sans-Serif;
+}
