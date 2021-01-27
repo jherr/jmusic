@@ -6,9 +6,9 @@ const LINE_HEIGHT = 30;
 const Tableture: React.FC<{
   instrument: StringedInstrument;
   tab: number[][];
-  clickHandler: (index: number) => void;
+  onClick: (index: number) => void;
   selected: number[];
-}> = ({ instrument, tab, clickHandler, selected }) => {
+}> = ({ instrument, tab, onClick, selected }) => {
   return (
     <div style={{ display: 'inline' }}>
       <TabStartSVG instrument={instrument} />
@@ -19,7 +19,7 @@ const Tableture: React.FC<{
             index={index}
             instrument={instrument}
             key={index}
-            handleClick={clickHandler}
+            handleClick={onClick}
             selected={selected}
           />
         );
@@ -41,7 +41,7 @@ const TabSVG: React.FC<{
   const numberStrokeColor = selected.includes(index) ? 'white' : 'black';
   return (
     <svg
-      style={{ display: 'inline', backgroundColor: `${backgroundColor}` }}
+      style={{ display: 'inline', backgroundColor }}
       width="30"
       height={instrument.numStrings * LINE_HEIGHT}
       onClick={() => handleClick(index)}
