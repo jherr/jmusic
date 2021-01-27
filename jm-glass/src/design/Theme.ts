@@ -35,7 +35,7 @@ export const Pill = styled(PillBase)<{ selected?: boolean }>(({ selected }) => [
 
 /** Chord */
 export const Container = tw.div`bg-gray-200 bg-opacity-40 rounded-md`;
-export const Inversion = tw.div`bg-white bg-opacity-40 rounded-b-md text-xs p-2 text-gray-700 text-center text-lg subpixel-antialiased`;
+export const Inversion = tw.div`bg-white bg-opacity-40 rounded-b-md text-xs p-2 text-blue-700 text-center text-lg subpixel-antialiased`;
 
 /** Pagination */
 export const PagesBar = tw.div`w-full text-center`;

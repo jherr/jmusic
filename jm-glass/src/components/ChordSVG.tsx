@@ -71,11 +71,11 @@ const ChordSVG: React.FC<{
         </g>
       ))}
       {instrument.topNames.map((note, index) => (
-        <g key={`${note}:${index}:label`}>
+        <g key={`${note}:${index}:label`} >
           <text
             x={index * 15 + 7.5}
-            y={10}
-            style={{ fontSize: "0.5rem", fill: "#eee" }}
+            y={7}
+            style={{ fontSize: "0.5rem", fill: "#eee",  }}
           >
             {note}
           </text>
@@ -99,6 +99,7 @@ const ChordSVG: React.FC<{
           y1={12 + fret * 27}
           y2={12 + fret * 27}
           style={{
+            
             strokeWidth: 1,
             stroke: "#ddd",
           }}
