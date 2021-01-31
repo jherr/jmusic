@@ -15,11 +15,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: install # will run `yarn install` command
+        run: npm install -g yarn # Extra Step
+      - name: yarn install, build, and test
+        run: |
+          yarn install
       - name: Build page
-        run: npm run build
+        run: yarn run build
         working-directory: ./jm-glass
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
