@@ -15,8 +15,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-        run: npm install -g yarn # Extra Step
-      - name: yarn install, build, and test
+      - name: Install yarn globally
+        run: npm install -g yarn
+      - name: yarn install
         run: |
           yarn install
       - name: Build page
