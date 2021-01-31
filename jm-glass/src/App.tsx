@@ -15,7 +15,7 @@ import {
   PagesContainer,
 } from '@design/Theme';
 
-const CACHE_HOST = '/cache/jmusic';
+const CACHE_HOST = '/jmusic/cache';
 const guitar = StringedInstrument.guitar;
 
 interface SimplifiedChord {
