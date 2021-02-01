@@ -6,6 +6,7 @@
     "jm-glass"
   ],
   "scripts": {
-    "serve:cache": "cd cache && npx servor"
+    "serve:cache": "cd cache && npx servor",
+    "install-jglass": "cd jm-glass && yarn install"
   }
 }
