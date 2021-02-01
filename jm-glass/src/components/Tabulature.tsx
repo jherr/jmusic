@@ -3,12 +3,19 @@ import { StringedInstrument } from '@engine/strings';
 
 const LINE_HEIGHT = 30;
 
-const Tableture: React.FC<{
+export interface TabulatureProps {
   instrument: StringedInstrument;
   tab: number[][];
-  onClick: (index: number) => void;
+  onClick?: (index: number) => void;
   selected: number[];
-}> = ({ instrument, tab, onClick, selected }) => {
+}
+
+const Tabulature = ({
+  instrument,
+  tab,
+  onClick,
+  selected,
+}: TabulatureProps) => {
   return (
     <div style={{ display: 'inline' }}>
       <TabStartSVG instrument={instrument} />
@@ -19,7 +26,7 @@ const Tableture: React.FC<{
             index={index}
             instrument={instrument}
             key={index}
-            handleClick={onClick}
+            onClick={onClick}
             selected={selected}
           />
         );
@@ -33,9 +40,9 @@ const TabSVG: React.FC<{
   chord: number[];
   instrument: StringedInstrument;
   index: number;
-  handleClick: (index: number) => void;
+  onClick?: (index: number) => void;
   selected: number[];
-}> = ({ chord, instrument, index, handleClick, selected }) => {
+}> = ({ chord, instrument, index, onClick, selected }) => {
   const backgroundColor = selected.includes(index) ? 'black' : 'white';
   const lineStrokeColor = selected.includes(index) ? 'white' : 'black';
   const numberStrokeColor = selected.includes(index) ? 'white' : 'black';
@@ -44,7 +51,7 @@ const TabSVG: React.FC<{
       style={{ display: 'inline', backgroundColor }}
       width="30"
       height={instrument.numStrings * LINE_HEIGHT}
-      onClick={() => handleClick(index)}
+      onClick={() => onClick?.(index)}
     >
       {chord.map((fretNum, stringIndex) => {
         const y =
@@ -162,4 +169,4 @@ const TabEndSVG: React.FC<{
   );
 };
 
-export default Tableture;
+export default Tabulature;

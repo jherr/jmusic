@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
-import { Menu } from "@headlessui/react";
-import tw from "twin.macro";
+import styled from '@emotion/styled';
+import { Menu } from '@headlessui/react';
+import tw from 'twin.macro';
 
 /** Main Layout */
 export const MainContainer = tw.div`container mx-auto flex px-5 py-24 flex-col`;
@@ -8,7 +8,8 @@ export const Logo = tw.div`text-black items-center font-medium flex mb-4 md:mb-0
 export const Header = tw.header`text-gray-700 my-3 `;
 export const HeaderContainer = tw.div`container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center bg-blue-100 rounded `;
 
-export const ContentContainer = tw.div`grid grid-rows-3 md:grid-rows-3 sm:grid-flow-row md:grid-flow-col gap-4`;
+export const TabulatureContainer = tw.div`p-4 rounded-l w-full`;
+export const ChordContainer = tw.div`grid grid-rows-3 md:grid-rows-3 sm:grid-flow-row md:grid-flow-col gap-4`;
 
 /** Chord Selector */
 export const ChordSelectorContainer = tw.div`z-50 absolute overflow-y-scroll h-screen left-0 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none`;
